@@ -4,7 +4,8 @@ Saving and loading is single line per all ui items.
 Without need for separate implementations for ui getters-setter , config file loading , saving code etc.
 Connections are established by generating signals for UI value changes.
 
- Ui items:  spinBox,doubleSpinBox,checkBox,radioButton,dateTimeEdit,slider
+ Ui items:  spinBox,doubleSpinBox,checkBox,radioButton,dateTimeEdit,slider..
+ 
  Ways of syncing all UI components via single line of code: valToUi, valFromUi,  fileFromUi,   fileToUiAndPtr
 
 
