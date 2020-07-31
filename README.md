@@ -6,7 +6,7 @@ Connections are established by generating signals for UI value changes.
 
  Ui items:  spinBox,doubleSpinBox,checkBox,radioButton,dateTimeEdit,slider..
  
- Ways of syncing all UI components via single line of code: valToUi, valFromUi,  fileFromUi,   fileToUiAndPtr
+ Ways of syncing all UI components via single line of code: valToUi, valFromUi,  fileFromUi,   fileToUi
 
 
     /*! Use this function to add ui components for syncing.
