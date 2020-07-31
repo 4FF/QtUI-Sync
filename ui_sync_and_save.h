@@ -16,7 +16,7 @@ enum uiOp{
     valToUi,
     valFromUi,
     fileFromUi,
-    fileToUiAndPtr
+    fileToUi
 };
 
 // multip 100 = if setting item x100 , if setting val /100
@@ -164,7 +164,9 @@ public:
     }
 
 
-    void syncUiVals(QObject *target=NULL, uiOp op=uiOp::valFromUi);
+    void syncUiVal(QObject *target=NULL, uiOp op=uiOp::valFromUi);
+
+    void syncAllUiVals(uiOp op=uiOp::valFromUi);
 
     QSettings* uiSet;
     void saveUiValsToFile(QString path);

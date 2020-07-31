@@ -4,7 +4,7 @@
 
 void ui_sync_and_save::sync()
 {
-        syncUiVals(sender());//should return ptr of signal caller widget
+        syncUiVal(sender());//should return ptr of signal caller widget
 }
 
 ui_sync_and_save::ui_sync_and_save()
@@ -12,7 +12,7 @@ ui_sync_and_save::ui_sync_and_save()
 
 }
 
-    void ui_sync_and_save::syncUiVals(QObject *target,uiOp op)
+    void ui_sync_and_save::syncUiVal(QObject *target,uiOp op)
     {
 
         if(target==NULL)
@@ -37,33 +37,33 @@ ui_sync_and_save::ui_sync_and_save()
                        switch (item->valueType) {
                        case valType::int_:
                        sBox->setValue(valCorrection(*(int*)item->valPtr,*item,uiOp::valToUi));
-                       goto outOfSwitch;
+                       goto jumpSwitch;
                        case valType::float_:
                        sBox->setValue(valCorrection(*(float*)item->valPtr,*item,uiOp::valToUi));
-                       goto outOfSwitch;
+                       goto jumpSwitch;
                        case valType::double_:
                        sBox->setValue(valCorrection(*(double*)item->valPtr,*item,uiOp::valToUi));
-                       goto outOfSwitch;
+                       goto jumpSwitch;
                        }
                     case uiOp::valFromUi:
                        switch (item->valueType) {
                        case valType::int_:
                        *(int*)item->valPtr=valCorrection(sBox->value(),*item);
-                       goto outOfSwitch;
+                       goto jumpSwitch;
                        case valType::float_:
                        *(float*)item->valPtr=valCorrection(sBox->value(),*item);
-                       goto outOfSwitch;
+                       goto jumpSwitch;
                        case valType::double_:
                        *(double*)item->valPtr=valCorrection(sBox->value(),*item);
-                       goto outOfSwitch;
+                       goto jumpSwitch;
                        }
                      case uiOp::fileFromUi:
                          uiSet->setValue(sBox->objectName(), sBox->value());
-                        goto outOfSwitch;
-                     case uiOp::fileToUiAndPtr:
+                        goto jumpSwitch;
+                     case uiOp::fileToUi:
                        if(uiSet->contains(sBox->objectName()))
                         sBox->setValue(uiSet->value(sBox->objectName()).toInt());
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                     }
                 }}
             case doubleSpinBox:{
@@ -74,33 +74,33 @@ ui_sync_and_save::ui_sync_and_save()
                        switch (item->valueType) {
                        case valType::int_:
                        dsBox->setValue(valCorrection(*(int*)item->valPtr,*item,uiOp::valToUi));
-                       goto outOfSwitch;
+                       goto jumpSwitch;
                        case valType::float_:
                        dsBox->setValue(valCorrection(*(float*)item->valPtr,*item,uiOp::valToUi));
-                       goto outOfSwitch;
+                       goto jumpSwitch;
                        case valType::double_:
                        dsBox->setValue(valCorrection(*(double*)item->valPtr,*item,uiOp::valToUi));
-                       goto outOfSwitch;
+                       goto jumpSwitch;
                        }
                     case uiOp::valFromUi:
                        switch (item->valueType) {
                        case valType::int_:
                        *(int*)item->valPtr=valCorrection(dsBox->value(),*item);
-                       goto outOfSwitch;
+                       goto jumpSwitch;
                        case valType::float_:
                        *(float*)item->valPtr=valCorrection(dsBox->value(),*item);
-                       goto outOfSwitch;
+                       goto jumpSwitch;
                        case valType::double_:
                        *(double*)item->valPtr=valCorrection(dsBox->value(),*item);
-                       goto outOfSwitch;
+                       goto jumpSwitch;
                        }
                      case uiOp::fileFromUi:
                          uiSet->setValue(dsBox->objectName(), dsBox->value());
-                        goto outOfSwitch;
-                     case uiOp::fileToUiAndPtr:
+                        goto jumpSwitch;
+                     case uiOp::fileToUi:
                         if(uiSet->contains(dsBox->objectName()))
                         dsBox->setValue(uiSet->value(dsBox->objectName()).toDouble());
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                     }
                 }}
             case checkBox:{
@@ -110,17 +110,17 @@ ui_sync_and_save::ui_sync_and_save()
                     switch (op){
                      case uiOp::valToUi:
                         cBox->setChecked(*p);
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                      case uiOp::valFromUi:
                         *p=cBox->isChecked();
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                      case uiOp::fileFromUi:
                          uiSet->setValue(cBox->objectName(), cBox->isChecked());
-                        goto outOfSwitch;
-                     case uiOp::fileToUiAndPtr:
+                        goto jumpSwitch;
+                     case uiOp::fileToUi:
                         if(uiSet->contains(cBox->objectName()))
                         cBox->setChecked(uiSet->value(cBox->objectName()).toBool());
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                     }
                 }}
             case radioButton:{
@@ -130,17 +130,17 @@ ui_sync_and_save::ui_sync_and_save()
                     switch (op){
                      case uiOp::valToUi:
                         rBut->setChecked(*p);
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                      case uiOp::valFromUi:
                         *p=rBut->isChecked();
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                      case uiOp::fileFromUi:
                          uiSet->setValue(rBut->objectName(), rBut->isChecked());
-                        goto outOfSwitch;
-                     case uiOp::fileToUiAndPtr:
+                        goto jumpSwitch;
+                     case uiOp::fileToUi:
                         if(uiSet->contains(rBut->objectName()))
                         rBut->setChecked(uiSet->value(rBut->objectName()).toBool());
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                     }
                 }
             }
@@ -151,17 +151,17 @@ ui_sync_and_save::ui_sync_and_save()
                     switch (op){
                      case uiOp::valToUi:
                         dtEdit->setDateTime(*p);
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                      case uiOp::valFromUi:
                         *p=dtEdit->dateTime();
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                      case uiOp::fileFromUi:
                         uiSet->setValue(dtEdit->objectName(), dtEdit->dateTime());
-                        goto outOfSwitch;
-                     case uiOp::fileToUiAndPtr:
+                        goto jumpSwitch;
+                     case uiOp::fileToUi:
                         if(uiSet->contains(dtEdit->objectName()))
                         dtEdit->setDateTime(uiSet->value(dtEdit->objectName()).toDateTime());
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                     }
                 }}
 
@@ -176,34 +176,34 @@ ui_sync_and_save::ui_sync_and_save()
                         switch (item->valueType) {
                         case valType::int_:
                         sli->setValue(valCorrection(*(int*)item->valPtr,*item,uiOp::valToUi));
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                         case valType::float_:
                         sli->setValue(valCorrection(*(float*)item->valPtr,*item,uiOp::valToUi));
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                         case valType::double_:
                         sli->setValue(valCorrection(*(double*)item->valPtr,*item,uiOp::valToUi));
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                         }
                      case uiOp::valFromUi:
 
                         switch (item->valueType) {
                         case valType::int_:
                         *(int*)item->valPtr=valCorrection(sli->value(),*item);
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                         case valType::float_:
                         *(float*)item->valPtr=valCorrection(sli->value(),*item);
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                         case valType::double_:
                         *(double*)item->valPtr=valCorrection(sli->value(),*item);
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                         }
                      case uiOp::fileFromUi:
                         uiSet->setValue(sli->objectName(), sli->value());
-                        goto outOfSwitch;
-                     case uiOp::fileToUiAndPtr:
+                        goto jumpSwitch;
+                     case uiOp::fileToUi:
                         if(uiSet->contains(sli->objectName()))
                         sli->setValue(uiSet->value(sli->objectName()).toInt());
-                        goto outOfSwitch;
+                        goto jumpSwitch;
                     }
                 }}
 
@@ -216,21 +216,22 @@ ui_sync_and_save::ui_sync_and_save()
 
 
 
-            outOfSwitch:
+            jumpSwitch:
 
 
-
-
-         if(op==uiOp::fileToUiAndPtr){
-             syncUiVals(NULL,uiOp::valFromUi);
+         if(item->groupIndex!=0){
+             processGroupEvent(item->groupIndex);
+             emit valsUpdated(item->groupIndex);
          }
 
-             if(item->groupIndex!=0){
-                 processGroupEvent(item->groupIndex);
-                 emit valsUpdated(item->groupIndex);
-               }
 
 
+    }
+
+    void ui_sync_and_save::syncAllUiVals(uiOp op)
+    {
+        for(auto i:uiItems)
+            syncUiVal(i.first,op);
 
     }
 
@@ -238,17 +239,18 @@ ui_sync_and_save::ui_sync_and_save()
     {
 
         uiSet = new QSettings(path,QSettings::IniFormat); //nb mem leak???????
-        syncUiVals(NULL,uiOp::fileFromUi);
+        syncAllUiVals(uiOp::fileFromUi);
     }
 
     bool ui_sync_and_save::loadUiVals(QString path)
     {
         if (QFile::exists(path)){
             uiSet = new QSettings(path,QSettings::IniFormat);  //nb mem leak???????
-            syncUiVals(NULL,uiOp::fileToUiAndPtr);
+            syncAllUiVals(uiOp::fileToUi);
+            syncAllUiVals(uiOp::valFromUi);
             return 1;
         }else{
-            syncUiVals(NULL,uiOp::valFromUi);
+            syncAllUiVals(uiOp::valFromUi);
             return 0;
         }
 
