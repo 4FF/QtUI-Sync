@@ -135,10 +135,9 @@ public:
     map<char, std::function<void()>>eventGroups;
 
     /*! To connect functions to ui item changes via ui item groups.
-
        Reminder:
-         addSharedEvent(num, staticFunc );
-         addSharedEvent(num, bind( &MainWin::classFunc, this) );
+         addGroupEvent(num, staticFunc );
+         addGroupEvent(num, bind( &MainWin::classFunc, this) );
      */
     void addGroupEvent(char groupIndex, const std::function<void()>& callback){
         if(groupIndex==0)
@@ -189,7 +188,7 @@ public slots:
     void sync();
 signals:
     void errorMsg(QString error);
-    void valsUpdated(char groupIndex);
+   // void valsUpdated(char groupIndex);
 };
 
 #endif // UI_SYNC_AND_SAVE_H

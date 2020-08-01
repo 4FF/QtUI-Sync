@@ -219,11 +219,9 @@ ui_sync_and_save::ui_sync_and_save()
             jumpSwitch:
 
 
-         if(item->groupIndex!=0){
              processGroupEvent(item->groupIndex);
-             emit valsUpdated(item->groupIndex);
-         }
 
+        // emit valsUpdated(item->groupIndex);
 
 
     }
