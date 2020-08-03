@@ -1,5 +1,5 @@
 # QtUI-Sync
-Synchronizes commonly used GUI elements between UI and in-app variables using line of code per ui-component..
+Synchronizes commonly used GUI elements to in-app variables using line of code per ui-component..
 Saving and loading is single line per all ui items.
 Without need for separate implementations for ui getters-setter , config file loading , saving code etc.
 Connections are established by generating signals for UI value changes.
